@@ -1,4 +1,4 @@
-app.service('MessageBoardService', ['$http', function($http) {
+app.service('MessageBoardService', ['$http', '$mdDialog', '$mdToast', function($http, $mdDialog, $mdToast) {
   console.log('Message Board Service loaded');
 
   var self = this;
@@ -19,6 +19,12 @@ app.service('MessageBoardService', ['$http', function($http) {
       })
       .catch(function (error) {
         console.log('error in GET /message', error);
+        $mdDialog.show(
+          $mdDialog.alert()
+            .title('Error')
+            .textContent('We were unable to load messages from the Database! Please refresh in a few minutes.')
+            .ok('Ok')
+        )
       })
   }
 
@@ -31,9 +37,19 @@ app.service('MessageBoardService', ['$http', function($http) {
       .then(function () {
         self.getMessages();
         self.clearNewMessage();
+        $mdToast.show(
+          $mdToast.simple()
+            .textContent('Message added')
+        )
       })
       .catch(function (error) {
         console.log('error in POST /message', error);
+        $mdDialog.show(
+          $mdDialog.alert()
+            .title('Error')
+            .textContent('Something went wrong! Please try again in a few minutes.')
+            .ok('Ok')
+        )
       })
   }
 
