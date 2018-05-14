@@ -1,0 +1,27 @@
+<md-divider>
+  <md-divider layout="column" layout-align="center center">
+    <form>
+      <md-input-container>
+        <label>Name:</label>
+        <input type="text" ng-model="vm.newMessage.name" />
+      </md-input-container>
+      <br />
+      <md-input-container>
+        <label>Message:</label>
+        <textarea cols=70 rows=1 ng-model="vm.newMessage.message"></textarea>
+      </md-input-container>
+      <br />
+      <div style="width: 100%" layout="row" layout-align="center">
+        <md-button class="md-raised md-primary" ng-click="vm.addMessage()">Submit</md-button>
+      </div>
+    </form>
+  </md-divider>
+  <md-divider>
+    <ul layout="column" layout-align="center center">
+      <li ng-repeat="message in vm.messages.list">
+        <p><strong>{{message.name}}:</strong> {{message.message}}</p>
+      </li>
+    </ul>
+  </md-divider>
+  <hr />
+</md-divider>
